@@ -22,7 +22,7 @@ const ChatInput = ({id, pasteValue}: {id: string, pasteValue: string}) => {
         }
     }, [pasteValue]);
     return (
-        <div className="w-full flex flex-col items-center justify-center max-w-3xl mx-auto pt-3 pt-3 px-4">
+        <div className="w-full flex flex-col items-center justify-center max-w-3xl mx-auto pt-3 pb-3 px-4">
             <form
                 onSubmit={handleSubmit}
                 className="bg-white/10 rounded-lg flex items-center px-4 py-2.5 w-full">

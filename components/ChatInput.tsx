@@ -5,8 +5,14 @@ import ModelSelection from "@/components/ModelSelection";
 import { useChat } from 'ai/react';
 
 const ChatInput = ({id, pasteValue}: {id: string, pasteValue: string}) => {
-    const { messages, input, handleInputChange, handleSubmit } = useChat({});
-    const [loading, setLoading] = React.useState(false);
+    const {
+        // messages,
+        input, handleInputChange, handleSubmit
+    } = useChat({});
+    const [
+        loading,
+        // setLoading
+    ] = React.useState(false);
 
     // update input value when pasting
     React.useEffect(() => {

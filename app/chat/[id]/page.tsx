@@ -27,15 +27,15 @@ const ChatPage = ({params: {id}}: Props) => {
 
     const {
         messages,
-        setMessages,
+        // setMessages,
         handleSubmit,
         handleInputChange,
         input,
-        setInput,
-        append,
+        // setInput,
+        // append,
         isLoading,
-        stop,
-        data: streamingData,
+        // stop,
+        // data: streamingData,
     } = useChat({
         body: {id},
         initialMessages: initialMessages !== undefined ?convertToUIMessages(initialMessages):[],

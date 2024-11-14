@@ -4,13 +4,13 @@ import {
     convertToCoreMessages,
     Message,
     StreamData,
-    streamText,
+    streamText, TextPart,
 } from 'ai';
 
 import { auth } from '@/auth';
 import {
     deleteChatById,
-    getChatById,
+    getChatById, IMessage,
     saveChat,
     saveMessages,
 } from '@/db/queries';
@@ -58,10 +58,9 @@ export async function POST(request: Request) {
         await saveChat({ id, userId: session.user.id, title });
     }
 
-    // @ts-expect-error it is fine
     await saveMessages({
         messages: [
-            { ...userMessage, _id: new mongoose.Types.ObjectId(), createdAt: new Date(), chatId: id },
+            { ...userMessage, _id: new mongoose.Types.ObjectId(), createdAt: new Date(), chatId: id } as IMessage,
         ],
     });
 
@@ -76,7 +75,6 @@ export async function POST(request: Request) {
             if (session.user && session.user.id) {
                 try {
 
-                    // @ts-expect-error it is fine
                     await saveMessages({
                         messages: responseMessages.map(
                             (message) => {
@@ -87,15 +85,15 @@ export async function POST(request: Request) {
                                         messageIdFromServer: messageId.toString(),
                                     });
                                 }
+                                const content = message.content[0] as TextPart;
 
-                                // @ts-expect-error it is fine
                                 return {
                                     id: messageId,
                                     chatId: id,
                                     role: message.role,
-                                    content: message.content[0].text,
+                                    content: content.text,
                                     createdAt: new Date(),
-                                };
+                                } as IMessage;
                             }
                         ),
                     });

@@ -1,5 +1,6 @@
 import mongoose, {Document} from 'mongoose';
 import { User, Chat, Message } from './schema';
+import {ProviderMetadata} from "ai";
 
 // Connect to MongoDB
 await mongoose.connect(process.env.MONGO_URL!, {});

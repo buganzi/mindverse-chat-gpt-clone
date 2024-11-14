@@ -3,7 +3,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import {ImArrowUpRight2} from "react-icons/im";
 import ModelSelection from "@/components/ModelSelection";
 import {useChat} from "ai/react";
-import {BsArrowDownCircle} from "react-icons/bs";
 import MessageItem from "@/components/Message";
 
 const suggestedActions = [

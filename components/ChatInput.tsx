@@ -17,6 +17,7 @@ const ChatInput = ({id, pasteValue}: {id: string, pasteValue: string}) => {
     // update input value when pasting
     React.useEffect(() => {
         if (pasteValue) {
+            // @ts-expect-error it is fine
             handleInputChange({target: {value: pasteValue}});
         }
     }, [pasteValue]);

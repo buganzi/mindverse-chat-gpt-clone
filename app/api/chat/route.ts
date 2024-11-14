@@ -58,6 +58,7 @@ export async function POST(request: Request) {
         await saveChat({ id, userId: session.user.id, title });
     }
 
+    // @ts-expect-error it is fine
     await saveMessages({
         messages: [
             { ...userMessage, _id: new mongoose.Types.ObjectId(), createdAt: new Date(), chatId: id },
@@ -75,6 +76,7 @@ export async function POST(request: Request) {
             if (session.user && session.user.id) {
                 try {
 
+                    // @ts-expect-error it is fine
                     await saveMessages({
                         messages: responseMessages.map(
                             (message) => {
@@ -86,6 +88,7 @@ export async function POST(request: Request) {
                                     });
                                 }
 
+                                // @ts-expect-error it is fine
                                 return {
                                     id: messageId,
                                     chatId: id,

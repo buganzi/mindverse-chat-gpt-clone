@@ -44,7 +44,7 @@ export default function Home() {
             </div>
 
             <div className="w-full md:hidden mt-2"/>
-            <ChatInput pasteValue={pasteValue}/>
+            <ChatInput id="" pasteValue={pasteValue}/>
         </div>
     </main>
     );

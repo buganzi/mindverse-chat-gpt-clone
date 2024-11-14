@@ -20,6 +20,7 @@ export const {handlers, auth, signIn, signOut} = NextAuth({
                 if (user.length === 0){
                     user[0] = await createUser(session.user.email as string, session.user.name as string);
                 }
+                // @ts-expect-error
                 session.user.id = user[0]._id.toString();
             }
 

@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import {CoreMessage, CoreToolMessage, CoreUserMessage, generateText, Message, ToolInvocation} from "ai";
+import {CoreMessage, CoreUserMessage, generateText, Message, ToolInvocation} from "ai";
 import {openai} from "@ai-sdk/openai";
 import {IMessage} from "@/db/queries";
 

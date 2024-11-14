@@ -70,7 +70,7 @@ const ChatRow = ({ id }: Props) => {
             //mutate('/api/chats');
         }
     };
-    let chat: any;
+    let chat: IChat | undefined;
     if (chats) {
         chat = chats[0];
     }

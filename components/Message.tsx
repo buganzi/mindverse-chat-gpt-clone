@@ -10,8 +10,8 @@ const MessageItem = ({ message }: Props) => {
     const isMindVerse = message.role !== "user";
     return (
         <div className={`py-5 text-white `}>
-            <div className="flex space-x-2.5 md:space-x-5 md:px-10">
-                {isMindVerse && (<div className="border border-gray-600 w-9 h-9 rounded-full p-1 overflow-hidden">
+            <div className="flex space-x-2.5 md:space-x-5 md:px-10 w-full">
+                {isMindVerse && (<div className="border border-gray-600 w-12 h-9 rounded-full p-1 overflow-hidden">
                     <Image
                         src={mindVerseAvatar}
                         alt="userImage"
@@ -22,7 +22,7 @@ const MessageItem = ({ message }: Props) => {
                 </div>)}
 
                 <div
-                    className={`flex flex-col max-w-md ${
+                    className={`flex flex-col ${
                         isMindVerse ? "items-start" : "items-end w-full"
                     }`}
                 >

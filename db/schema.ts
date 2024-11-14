@@ -41,7 +41,6 @@ const Chat = models.Chat || model('Chat', chatSchema);
 const messageSchema = new Schema({
     chatId: {
         type: String,
-        ref: 'Chat',
         required: true,
     },
     role: {

@@ -2,14 +2,13 @@
 import React, {useEffect, useRef} from 'react';
 import {BsArrowDownCircle} from "react-icons/bs";
 import MessageItem from "@/components/Message";
-import {TbPaperclip} from "react-icons/tb";
 import {ImArrowUpRight2} from "react-icons/im";
-import ModelSelection from "@/components/ModelSelection";
 import {useChat} from "ai/react";
 import useSWR, {mutate} from "swr";
 import {IMessage} from "@/db/queries";
 import {convertToUIMessages, fetcher} from "@/lib/utils";
 import {useSession} from "next-auth/react";
+import mongoose from "mongoose";
 
 interface Props {
     params: {
@@ -18,10 +17,14 @@ interface Props {
 }
 
 const ChatPage = ({params: {id}}: Props) => {
+    let chatId = id;
+    if (!id || id==='') {
+        chatId = new mongoose.Types.ObjectId().toString();
+    }
     const { data: session } = useSession();
     const {
         data: initialMessages,
-    } = useSWR<Array<IMessage>>(session?.user ? `/api/chats/${id}/messages` : null, fetcher, {
+    } = useSWR<Array<IMessage>>(session?.user ? `/api/chats/${chatId}/messages` : null, fetcher, {
         fallbackData: [],
     });
 
@@ -37,7 +40,7 @@ const ChatPage = ({params: {id}}: Props) => {
         // stop,
         // data: streamingData,
     } = useChat({
-        body: {id},
+        body: { id:chatId },
         initialMessages: initialMessages !== undefined ?convertToUIMessages(initialMessages):[],
         onFinish: () => {
             mutate('/api/chats');
@@ -75,7 +78,6 @@ const ChatPage = ({params: {id}}: Props) => {
                 <form
                     onSubmit={handleSubmit}
                     className="bg-white/10 rounded-full flex items-center px-4 py-2.5 w-full">
-                    <TbPaperclip className="text-2xl -rotate-45 text-white"/>
                     <input type="text"
                            placeholder="Type your message here"
                            onChange={handleInputChange}
@@ -90,13 +92,12 @@ const ChatPage = ({params: {id}}: Props) => {
                         <ImArrowUpRight2 className="text-sm -rotate-45 text-black/80"/>
                     </button>
                 </form>
-                {id && (
+                {chatId && (
                     <p className="text-xs mt-2 font-medium tracking-wide">
                         ChatGPT can make mistakes. Check important info.
                     </p>
                 )}
-                <div className="w-full md:hidden mt-2">
-                    <ModelSelection/>
+                <div className="w-full mt-2">
                 </div>
             </div>
         </div>

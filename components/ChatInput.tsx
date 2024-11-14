@@ -1,9 +1,11 @@
 'use client';
 import React, {useEffect, useRef, useState} from 'react';
 import {ImArrowUpRight2} from "react-icons/im";
-import ModelSelection from "@/components/ModelSelection";
 import {useChat} from "ai/react";
 import MessageItem from "@/components/Message";
+import {useSession} from "next-auth/react";
+import {useRouter} from "next/navigation";
+import mongoose from "mongoose";
 
 const suggestedActions = [
     {
@@ -22,6 +24,12 @@ const suggestedActions = [
 
 const ChatInput = ({id}: { id: string }) => {
 
+    const{data: session} = useSession();
+    const router = useRouter();
+    if (session?.user) {
+        const chatId = new mongoose.Types.ObjectId().toString();
+        router.push(`/chat/${chatId}`);
+    }
     const [pasteValue, setPasteValue] = useState('');
 
     const {messages, input, handleInputChange, handleSubmit, isLoading} = useChat({});
@@ -109,7 +117,6 @@ const ChatInput = ({id}: { id: string }) => {
                         </p>
                     )}
                     <div className="w-full md:hidden mt-2">
-                        <ModelSelection/>
                     </div>
                 </div>
             </div>

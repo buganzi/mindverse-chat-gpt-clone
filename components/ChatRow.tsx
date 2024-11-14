@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { IoChatboxOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
-import useSWR, {mutate} from "swr";
+import useSWR from "swr";
 import {IChat} from "@/db/queries";
 import {fetcher} from "@/lib/utils";
 import toast from "react-hot-toast";

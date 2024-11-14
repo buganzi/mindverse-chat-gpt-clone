@@ -2,19 +2,11 @@
 import React from 'react';
 import {FaPlus} from "react-icons/fa";
 import {useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
 import mongoose from "mongoose";
 
 const NewChat = () => {
     const router = useRouter();
-    const {data: session} = useSession();
-    // const userEmail = session?.user?.email ?(session?.user?.email as string) : 'unknown';
     const createNewChat = async () => {
-        // const doc = await addDoc(collection(db, "users",userEmail, 'chats'),
-        //     {
-        //         userId: userEmail,
-        //         createdAt: serverTimestamp(),
-        //     });
         const id = new mongoose.Types.ObjectId().toString();
         router.push(`/chat/${id}`);
     }

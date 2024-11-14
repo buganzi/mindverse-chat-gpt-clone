@@ -1,8 +1,7 @@
 import { auth } from "@/auth";
 import {getChatById} from "@/db/queries";
-import {NextApiRequest} from "next";
 
-export async function GET( request: NextApiRequest, { params }: { params: { id: string } }) {
+export async function GET( request: Request, { params }: { params: { id: string } }) {
     const session = await auth();
 
     if (!session || !session.user) {
